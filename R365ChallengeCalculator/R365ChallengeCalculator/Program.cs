@@ -23,9 +23,9 @@ namespace R365ChallengeCalculator
 
             string[] parsedInput = stringParser.Parse(input);
                         
-            int result = calculator.Calculate(parsedInput);
+            (int result, string formulaDisplay) = calculator.Calculate(parsedInput);
 
-            consoleManager.WriteOutput(result.ToString());
+            consoleManager.WriteOutput($"{formulaDisplay} = {result.ToString()}");
         }
     }
 }

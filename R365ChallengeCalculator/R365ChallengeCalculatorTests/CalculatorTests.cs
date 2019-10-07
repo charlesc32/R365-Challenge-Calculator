@@ -15,7 +15,8 @@ namespace R365ChallengeCalculatorTests
         public void Calculate_ShouldSucceed(string[] input, int expectedSum)
         {
             var calculator = new Calculator();
-            int result = calculator.Calculate(input);
+            (int result, string formulaDisplay) = calculator.Calculate(input);
+            Console.WriteLine(formulaDisplay);
             Assert.AreEqual(expectedSum, result);
         }
 
@@ -36,7 +37,8 @@ namespace R365ChallengeCalculatorTests
         public void Calculate_ShouldUse0ForGreaterThan1000(string[] input, int expectedSum)
         {
             var calculator = new Calculator();
-            int result = calculator.Calculate(input);
+            (int result, string formulaDisplay) = calculator.Calculate(input);
+            Console.WriteLine(formulaDisplay);
             Assert.AreEqual(expectedSum, result);
         }
     }

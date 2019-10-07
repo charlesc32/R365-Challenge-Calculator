@@ -2,6 +2,6 @@
 {
     interface ICalculator
     {
-        int Calculate(string[] inputs);
+        (int result, string formulaDisplay) Calculate(string[] inputs);
     }
 }

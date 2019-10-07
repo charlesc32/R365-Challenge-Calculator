@@ -3,9 +3,11 @@ using System.Collections.Generic;
 
 namespace R365ChallengeCalculator
 {
-    public class Calculator: ICalculator
+    public class Calculator : ICalculator
     {
+        private static readonly int UPPERBOUND = 1000;
         private static readonly int LOWERBOUND = 0;
+
         public int Calculate(string[] inputs)
         {
             int sum = 0;
@@ -18,12 +20,17 @@ namespace R365ChallengeCalculator
                     input = 0;
                 }
 
-                if (input < 0)
+                if (input < LOWERBOUND)
                 {
                     deniedNegativeNumbers.Add(input);
                     continue;
                 }
-                                
+
+                if (input > UPPERBOUND)
+                {
+                    input = 0;
+                }
+
                 sum += input;
             }
 

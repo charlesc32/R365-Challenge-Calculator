@@ -35,6 +35,7 @@ namespace R365ChallengeCalculator
         public void WriteOutput(string output)
         {
             _console.WriteLine($"Calculation result is: {output}");
+            _console.WriteLine("Enter Ctrl-C to exit.");
         }
     }
 }

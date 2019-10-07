@@ -19,13 +19,16 @@ namespace R365ChallengeCalculator
             var stringParser = serviceProvider.GetService<IStringParser>();
             var calculator = serviceProvider.GetService<ICalculator>();
 
-            string input = consoleManager.ReadInput();
+            do
+            {
+                string input = consoleManager.ReadInput();
 
-            string[] parsedInput = stringParser.Parse(input);
-                        
-            (int result, string formulaDisplay) = calculator.Calculate(parsedInput);
+                string[] parsedInput = stringParser.Parse(input);
 
-            consoleManager.WriteOutput($"{formulaDisplay} = {result.ToString()}");
+                (int result, string formulaDisplay) = calculator.Calculate(parsedInput);
+
+                consoleManager.WriteOutput($"{formulaDisplay} = {result.ToString()}");
+            } while (true);
         }
     }
 }

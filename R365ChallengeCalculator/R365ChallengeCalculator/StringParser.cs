@@ -1,4 +1,6 @@
-﻿namespace R365ChallengeCalculator
+﻿using System;
+
+namespace R365ChallengeCalculator
 {
     public class StringParser: IStringParser
     {
@@ -6,9 +8,15 @@
         {
             if (string.IsNullOrWhiteSpace(input)) return new string[] { };
 
-            string[] parsedUserInput = input.Split(",");
+            input = NormalizeNewLines(input);
+            string[] parsedUserInput = input.Split(new char[] { ',', '\n' }, StringSplitOptions.RemoveEmptyEntries);            
 
             return parsedUserInput;
+        }
+
+        private string NormalizeNewLines(string input)
+        {
+            return input.Replace("\r\n", "\n");
         }
     }
 }

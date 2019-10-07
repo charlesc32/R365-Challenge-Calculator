@@ -2,6 +2,7 @@
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using R365ChallengeCalculator;
+using System;
 
 namespace R365ChallengeCalculatorTests
 {
@@ -26,6 +27,17 @@ namespace R365ChallengeCalculatorTests
             var parser = new StringParser();
             var result = parser.Parse(input);
             Assert.AreEqual(expectedCount, result.Length);            
+        }
+
+        [DataTestMethod]
+        [DataRow(new string[] { "1", "2", "3" }, "1\n2,3")]
+        [DataRow(new string[] { "1", "2" }, "1,2\n")]
+        [DataRow(new string[] { "2", "1" }, "\n2\n1\n")]
+        public void Parse_ShouldSucceedWithNewLine(string[] expected, string input)
+        {
+            var parser = new StringParser();
+            var result = parser.Parse(input);
+            CollectionAssert.AreEqual(expected, result);
         }
     }
 }

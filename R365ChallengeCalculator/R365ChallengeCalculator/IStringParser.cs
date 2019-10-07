@@ -2,6 +2,6 @@
 {
     interface IStringParser
     {
-        string[] Parse(string input);
+        string[] Parse(string input, string alternateDelimeter = "\n");
     }
 }

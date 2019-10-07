@@ -6,10 +6,9 @@ namespace R365ChallengeCalculator
 {
     public class Calculator : ICalculator
     {
-        private static readonly int UPPERBOUND = 1000;
         private static readonly int LOWERBOUND = 0;
 
-        public (int result, string formulaDisplay) Calculate(string[] inputs)
+        public (int result, string formulaDisplay) Calculate(string[] inputs, bool allowNegative = false, int upperBound = 1000)
         {
             int sum = 0;
             var deniedNegativeNumbers = new List<int>();
@@ -22,13 +21,13 @@ namespace R365ChallengeCalculator
                     input = 0;
                 }
 
-                if (input < LOWERBOUND)
+                if (input < LOWERBOUND && !allowNegative)
                 {
                     deniedNegativeNumbers.Add(input);
                     continue;
                 }
 
-                if (input > UPPERBOUND)
+                if (input > upperBound)
                 {
                     input = 0;
                 }

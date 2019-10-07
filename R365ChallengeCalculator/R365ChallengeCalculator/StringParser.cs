@@ -8,7 +8,7 @@ namespace R365ChallengeCalculator
         private static readonly char CUSTOM_DELIMETER_START = '[';
         private static readonly char CUSTOM_DELIMETER_END = ']';
 
-        public string[] Parse(string input)
+        public string[] Parse(string input, string alternateDelimeter = "\n")
         {
             if (string.IsNullOrWhiteSpace(input)) return new string[] { };
             
@@ -16,7 +16,7 @@ namespace R365ChallengeCalculator
             strippedUserInput = NormalizeNewLines(strippedUserInput);
 
             customDelimeters.Add(",");
-            customDelimeters.Add("\n");
+            customDelimeters.Add(alternateDelimeter);
             string[] parsedUserInput = strippedUserInput.Split(customDelimeters.ToArray(), StringSplitOptions.RemoveEmptyEntries);
 
             return parsedUserInput;

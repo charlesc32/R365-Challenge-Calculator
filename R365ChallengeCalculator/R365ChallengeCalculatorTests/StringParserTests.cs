@@ -52,5 +52,17 @@ namespace R365ChallengeCalculatorTests
             var result = parser.Parse(input);
             CollectionAssert.AreEqual(expected, result);
         }
+
+        [DataTestMethod]
+        [DataRow(new string[] { "4", "3" }, "//[#]4#3")]
+        [DataRow(new string[] { "44", "3", "3" }, "//[^]44,3^3")]
+        [DataRow(new string[] { "4", "2", "3" }, "//[-]4-2-3")]
+        [DataRow(new string[] { "11", "22", "33" }, "//[***]\n11***22***33")]
+        public void Parse_MultiCharacterCustomDelimetersShouldSucceed(string[] expected, string input)
+        {
+            var parser = new StringParser();
+            var result = parser.Parse(input);
+            CollectionAssert.AreEqual(expected, result);
+        }
     }
 }

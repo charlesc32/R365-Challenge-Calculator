@@ -8,9 +8,9 @@ namespace R365ChallengeCalculator
         {
             if (string.IsNullOrWhiteSpace(input)) return new string[] { };
             
-            (char customDelimeter, string strippedUserInput) = StripCustomDelimeter(input);
+            (string customDelimeter, string strippedUserInput) = StripCustomDelimeter(input);
             strippedUserInput = NormalizeNewLines(strippedUserInput);
-            string[] parsedUserInput = strippedUserInput.Split(new char[] { ',', '\n', customDelimeter }, StringSplitOptions.RemoveEmptyEntries);
+            string[] parsedUserInput = strippedUserInput.Split(new string[] { ",", "\n", "\\n", customDelimeter }, StringSplitOptions.RemoveEmptyEntries);
 
             return parsedUserInput;
         }
@@ -20,15 +20,29 @@ namespace R365ChallengeCalculator
             return input.Replace("\r\n", "\n");
         }
 
-        private static (char customDelimeter, string strippedUserInput) StripCustomDelimeter(string userInput)
+        private static (string customDelimeter, string strippedUserInput) StripCustomDelimeter(string userInput)
         {
-            char customDelimeter = Char.MinValue;
+            string customDelimeter = string.Empty;
             string strippedUserInput = userInput;
 
             if (userInput.StartsWith("//") && userInput.Length > 2)
             {
-                customDelimeter = userInput[2];
-                strippedUserInput = userInput.TrimStart(new char[] { '/', customDelimeter });
+                char customDelimeterStartingCharacter = userInput[2];
+                if (customDelimeterStartingCharacter == '[')
+                {
+                    var endingBracketIndex = userInput.LastIndexOf(']');
+                    if (endingBracketIndex == -1)
+                    {
+                        throw new ArgumentException("Invalid custom delimeter. No ending bracket found.");
+                    }
+                    customDelimeter = userInput.Substring(3, endingBracketIndex - 3);
+                    strippedUserInput = userInput.Substring(endingBracketIndex + 1);
+                }
+                else
+                {
+                    customDelimeter = userInput[2].ToString();
+                    strippedUserInput = userInput.Substring(3);
+                }
             }
 
             return (customDelimeter, strippedUserInput);

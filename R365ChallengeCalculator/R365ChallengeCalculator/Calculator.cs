@@ -6,8 +6,6 @@ namespace R365ChallengeCalculator
     {
         public int Calculate(string[] inputs)
         {
-            if (inputs.Length > 2) throw new ArgumentException("More than 2 inputs to calculation not supported.");
-
             int sum = 0;
 
             foreach (string inputItem in inputs)

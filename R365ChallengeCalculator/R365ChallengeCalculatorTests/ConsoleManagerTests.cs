@@ -30,7 +30,7 @@ namespace R365ChallengeCalculatorTests
         {
             var consoleInputManager = new ConsoleManager(new FakeConsole());
             string result = consoleInputManager.ReadInput();
-            Assert.AreEqual(",test string", result);
+            Assert.AreEqual("test string,", result);
         }
     }
 }

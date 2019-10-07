@@ -12,7 +12,7 @@ namespace R365ChallengeCalculator
 
         public string ReadInput()
         {
-            _console.WriteLine("Enter a comma and/or newline delimited string to calculate -- Enter ctrl-z on a new line when done inputing:");
+            _console.WriteLine("Enter a comma and/or newline or custom delimited string to calculate -- Enter ctrl-z on a new line when done inputing:");
             string line = string.Empty;
             var sb = new StringBuilder();
 
@@ -22,8 +22,9 @@ namespace R365ChallengeCalculator
 
                 if (!string.IsNullOrWhiteSpace(line))
                 {
-                    sb.Append(",");
+                    line.Replace("//", "/");
                     sb.Append(line);
+                    sb.Append(",");
                 }
 
             } while (line != null);
